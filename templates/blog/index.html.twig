@@ -12,7 +12,7 @@
             <div class="metadata">Ecrit le {{ article.createdAt | date('d/m/Y') }} à {{ article.createdAt | date('H:i') }} dans la catégorie Europe</div>
             <div class="content">
                 <img src="http://placehold.it/350x150" alt="">
-                {{ article.content | split(' ') | slice(0, 30) | join | raw }}... <br>
+                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Atque, saepe perferendis reprehenderit explicabo doloremque quae rem modi? Enim quidem iste eaque dignissimos pariatur animi saepe perferendis reprehenderit explicabo, consectetur adipisicing elit...</p>
                 <a href="{{ path('blog_show', { 'id': article.id }) }}" class="btn btn-primary">Lire la suite</a>
             </div>
         </article>
@@ -22,5 +22,3 @@
 </section>
 
 {% endblock %}
-
-{# split(' ')|slice(0, 25)|join #}
