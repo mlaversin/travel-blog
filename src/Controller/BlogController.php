@@ -7,6 +7,7 @@ use App\Repository\ArticleRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class BlogController extends AbstractController
 {
@@ -37,9 +38,21 @@ class BlogController extends AbstractController
         $article = new Article();
 
         $form = $this->createFormBuilder($article)
-                     ->add('title')
-                     ->add('content')
-                     ->add('image')
+                     ->add('title', null, [
+                         'attr' => [
+                            'placeholder' => "Titre de l'article"
+                         ]
+                     ])
+                     ->add('content', null, [
+                        'attr' => [
+                            'placeholder' => "Contenu de l'article"
+                            ]
+                     ])
+                     ->add('image', null, [
+                        'attr' => [
+                            'placeholder' => "Image de l'article"
+                        ]
+                     ])
                      ->getForm();
 
         return $this->render('blog/create.html.twig', [
