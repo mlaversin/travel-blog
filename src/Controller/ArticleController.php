@@ -13,14 +13,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class ArticleController extends AbstractController
 {
     /**
-     * @Route("/", name="home")
-     */
-    public function home(): Response
-    {
-        return $this->render('home.html.twig');
-    }
-
-    /**
      * @Route("/article", name="article")
      */
     public function index(ArticleRepository $repo): Response
@@ -81,7 +73,7 @@ class ArticleController extends AbstractController
             return $this->redirectToroute('article_show', ['id' => $article->getId()]);
         }
 
-        return $this->render('article/create.html.twig', [
+        return $this->render('article/edit.html.twig', [
             'articleForm' => $form->createView()
         ]);
     }
