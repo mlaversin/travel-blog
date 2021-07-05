@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Article;
+use App\Form\ArticleFormType;
 use App\Repository\ArticleRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -27,14 +28,11 @@ class ArticleController extends AbstractController
     /**
      * @Route("/article/new", name="article_create")
      */
-    public function create(Request $request, EntityManagerInterface $manager) {
+    public function create(Request $request, EntityManagerInterface $manager)
+    {
         $article = new Article();
 
-        $form = $this->createFormBuilder($article)
-                     ->add('title')
-                     ->add('content')
-                     ->add('image')
-                     ->getForm();
+        $form = $this->createForm(ArticleFormType::class, $article);
 
         $form->handleRequest($request);
         
@@ -55,13 +53,9 @@ class ArticleController extends AbstractController
     /**
      * @Route("/article/edit/{id}", name="article_edit")
      */
-    public function edit(Article $article, Request $request, EntityManagerInterface $manager) {
-       
-        $form = $this->createFormBuilder($article)
-                     ->add('title')
-                     ->add('content')
-                     ->add('image')
-                     ->getForm();
+    public function edit(Article $article, Request $request, EntityManagerInterface $manager)
+    {
+        $form = $this->createForm(ArticleFormType::class, $article);
 
         $form->handleRequest($request);
         
@@ -89,4 +83,5 @@ class ArticleController extends AbstractController
             'article' => $article
         ]);
     }
+
 }
