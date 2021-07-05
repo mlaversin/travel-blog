@@ -6,11 +6,15 @@
 
     <article>
         <h2> {{ article.title }} </h2>
-        <div class="metadata">Ecrit le {{ article.createdAt | date('d/m/Y') }} à {{ article.createdAt | date('H:i') }} dans la catégorie Europe</div>
+        <div class="metadata">Ecrit le {{ article.createdAt | date('d/m/Y') }} à {{ article.createdAt | date('H:i') }} dans la catégorie {{ article.category.title }}</div>
         <div class="content">
             <img src="{{ article.image }}" alt=""> <br>
             {{ article.content | raw }}
         </div>
     </article>
+
+    <section id="comments">
+    
+    </section>
 
 {% endblock %}

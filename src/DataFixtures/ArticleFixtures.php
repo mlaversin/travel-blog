@@ -2,23 +2,62 @@
 
 namespace App\DataFixtures;
 
+use Faker\Factory;
 use App\Entity\Article;
-use Doctrine\Bundle\FixturesBundle\Fixture;
+use App\Entity\Category;
+use App\Entity\Comment;
 use Doctrine\Persistence\ObjectManager;
+use Doctrine\Bundle\FixturesBundle\Fixture;
 
 class ArticleFixtures extends Fixture
 {
+
+
     public function load(ObjectManager $manager)
     {
-        for($i = 1; $i<= 20; $i ++) {
-            $article = new Article();
-            $article->setTitle("Titre de l'article n°$i")
-                    ->setContent("<p>Lorem ipsum Maiores eos officiis, incidunt magni numquam magnam reiciendis placeat quaerat laboriosam quia, velit aliquam eum possimus quod molestias facilis earum ducimus nostrum repellendus suscipit odit nihil error quo fugit! Molestiae, veritatis tenetur. Repellendus rerum, quia alias possimus</p>
-                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptatibus, repellat animi. Quibusdam pariatur eligendi sint? Amet a animi fugiat sint impedit eveniet assumenda esse officia debitis inventore. Distinctio aut dolorem repellat tempore corrupti architecto quod voluptas dolorum minima possimus! Quaerat eveniet deserunt voluptas error, expedita excepturi a ipsa ducimus repudiandae sequi beatae. Modi consectetur quos itaque beatae, non ipsa sint quibusdam repudiandae dolores adipisci assumenda, sapiente praesentium odio vel hic sed recusandae, quae magni aperiam blanditiis magnam quo! Quis dignissimos veritatis perspiciatis, perferendis non quo hic quos ex optio alias magni rerum ut porro cupiditate quod eveniet adipisci, amet natus, delectus velit. Maiores eos officiis, incidunt magni numquam magnam reiciendis placeat quaerat laboriosam quia, velit aliquam eum possimus quod molestias facilis earum ducimus nostrum repellendus suscipit odit nihil error quo fugit! Molestiae, veritatis tenetur. Repellendus rerum, quia alias possimus, harum earum, nobis aperiam esse deleniti et voluptatibus qui fuga. Minus optio id consequatur quos reprehenderit repudiandae nobis deleniti mollitia! Eum ut quae a? Debitis a numquam iure ipsum ad, repellat molestiae quia, rem itaque vel autem reprehenderit perferendis provident. Quibusdam voluptate culpa voluptas, sint dolorem ea exercitationem ullam a veniam minus error doloribus eveniet? Iste, expedita? Doloremque sint alias sed.</p>")
-                    ->setImage("http://placehold.it/350x150")
-                    ->setCreatedAt(new \DateTime());
+        $faker = Factory::create('fr_FR');
 
-                    $manager->persist($article);
+        // créer 3 catégories
+        for($i = 1; $i <= 3; $i++) {
+            $category = new Category();
+            $category->setTitle($faker->country());
+    
+            $manager->persist($category);
+        }
+
+        // créer entre 4 et 6 articles
+        for($j = 1; $j<= mt_rand(4, 6); $j ++) {
+            $article = new Article();
+
+            $content = '<p>' . join($faker->paragraphs(5), '</p><p>') . '</p>';
+
+            $article->setTitle($faker->sentence())
+                    ->setContent($content)
+                    ->setImage($faker->imageUrl())
+                    ->setCreatedAt($faker->dateTimeBetween('-6 months'))
+                    ->setCategory($category);
+
+            $manager->persist($article);
+
+        // créer des commentaires
+        for($k = 1; $k<= mt_rand(4, 10); $k ++) {
+            $comment = new Comment();
+
+            $content = '<p>' . join($faker->paragraphs(2), '</p><p>') . '</p>';
+
+            $now = new \DateTime();
+            $interval = $now->diff($article->getCreatedAt());
+            $days = $interval->days;
+            $minimum = '-' . $days . ' days';
+
+            $comment->setAuthor($faker->name)
+                    ->setContent($content)
+                    ->setCreatedAt($faker->dateTimeBetween($minimum))
+                    ->setArticle($article);
+
+            $manager->persist($comment);
+        }
+
         }
 
         $manager->flush();
