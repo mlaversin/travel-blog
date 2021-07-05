@@ -6,6 +6,12 @@
         })
     }}
 
+    {{ form_row(articleForm.category,
+        {'attr': {'placeholder': "Renseignez ici la catégorie de l\'article..."},
+        'label' : 'Catégorie de l\'article'
+        })
+    }}
+
     {{ form_row(articleForm.content,
         {'attr': {'placeholder': "Tapez ici le contenu de l\'article..."},
         'label' : 'Contenu de l\'article'
