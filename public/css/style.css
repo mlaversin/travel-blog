@@ -1,6 +1,7 @@
-body {
+* {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
 .navbar {
@@ -9,9 +10,9 @@ body {
     width: 100%; /* Full width */
 }
 
-#homepage {
-    background-image: url(../img/background-accueil.jpg);
-    background-repeat: no-repeat, repeat;
-    width: 100vW;
+section {
     height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
