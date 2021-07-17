@@ -2,6 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>{% block title %}{% endblock %}</title>
         {# ----------- cdn bootstrap ----------- #}
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -16,61 +17,70 @@
 
     {# --------- NAVBAR ---------- #}
 
-    <nav class="navbar navbar-expand-lg navbar-light">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="{{ path('home') }}">Travel Blog</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="{{ path('home') }}">Travel Blog</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{{ path('home') }}">Accueil</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ path('article')}}">Articles</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Destinations
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="#">Europe</a></li>
+            <li><a class="dropdown-item" href="#">Asie</a></li>
+            <li><a class="dropdown-item" href="#">Amériques</a></li>
+            <li><a class="dropdown-item" href="#">Afrique</a></li>
+            <li><a class="dropdown-item" href="#">Océanie</a></li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            A propos
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="#">Qui suis-je ?</a></li>
+            <li><a class="dropdown-item" href="#">Questions fréquentes</a></li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ path('article_create')}}">Créer un article</a>
+        </li>
+        {% if not app.user %}
+        <li class="nav-item">
+          <a class="nav-link" href="#authModal" data-toggle="modal" data-target="#authModal">Se connecter</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ path('app_register')}}">Créer un compte</a>
+        </li>
+        {% else %}
+        <li class="nav-item">
+          <a class="nav-link" href="{{ path('home', {id: app.user.id}) }}"><i class="far fa-user"></i>Mon compte</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ path('app_logout') }}"><i class="fas fa-sign-out-alt"></i></a>
+        </li>
+        {% endif %} 
+      </ul>
+      {# <form class="d-flex">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form> #}
+    </div>
+  </div>
+</nav>
 
-          <div class="collapse navbar-collapse" id="navbarColor01">
-            <ul class="navbar-nav me-auto">
-              <li class="nav-item">
-                <a class="nav-link active" href="{{ path('home')}}">Accueil
-                  <span class="visually-hidden">(current)</span>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{{ path('article')}}">Articles</a>
-              </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">DESTINATIONS</a>
-                <div class="dropdown-menu">
-                  <a class="dropdown-item" href="#">EUROPE</a>
-                  <a class="dropdown-item" href="#">ASIE</a>
-                  <a class="dropdown-item" href="#">AMERIQUE</a>
-                  <a class="dropdown-item" href="#">AFRIQUE</a>
-                  <a class="dropdown-item" href="#">OCEANIE</a>
-                </div>
-              </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">A PROPOS</a>
-                <div class="dropdown-menu">
-                  <a class="dropdown-item" href="#">QUI SUIS-JE ?</a>
-                  <a class="dropdown-item" href="#">QUESTIONS FREQUENTES</a>
-                </div>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{{ path('article_create')}}">Créer un article</a>
-              </li>
-              {% if not app.user %}
-               <button type="button" class="btn btn-link mb-1" data-toggle="modal" data-target="#authModal">Se connecter</button>
-                <a href="{{ path('app_register') }}" class="text-white btn btn-link mb-1">Créer un compte</a>
-              {% else %}
-                  <a href="{{ path('home', {id: app.user.id}) }}" class="btn btn-link mb-1">
-                  <i class="far fa-user"></i> Mon compte</a>
-                <a href="{{ path('app_logout') }}" class="btn btn-link mb-1">
-                  <i class="fas fa-sign-out-alt"></i>
-                </a>
-              {% endif %}
-            </ul>
-            {# <form class="d-flex">
-              <input class="form-control me-sm-2" type="text" placeholder="Search">
-              <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-            </form> #}
-          </div>
-        </div>
-    </nav>
+
+
 
     <div class="container">
     {% block body %}{% endblock %}
@@ -82,8 +92,7 @@
     {# cdn js bootstrap #}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
+
     {% block javascripts %}{% endblock %}
     
     </body>
