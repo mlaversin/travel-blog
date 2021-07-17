@@ -20,4 +20,38 @@
     </section>
 </div>
 
+
+{% block modals %}
+  <!-- Modal for authentication -->
+
+  <div class="modal fade" id="authModal" tabindex="-1" aria-labelledby="Authentication modal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <h3 class="modal-title">Connexion</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+        <div class="modal-body">
+          {{ include('security/login-modal.html.twig') }}
+        </div>
+
+        <div class="modal-footer">
+          <div class="my-2 text-right">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annulation</button>
+        <button type="button" class="btn btn-primary">Connexion</button>
+          </div>
+        </div>
+
+      </form>
+
+    </div>
+  </div>
+</div>
+</div>
+
+{% endblock %}
+
+
 {% endblock %}
