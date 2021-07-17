@@ -5,6 +5,8 @@
         <title>{% block title %}{% endblock %}</title>
         <link rel="stylesheet" href="https://bootswatch.com/5/sandstone/bootstrap.min.css">
         <link rel="stylesheet" href="/css/style.css" type="text/css">
+        <!-- Font awesome for logos -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous"/>
         {% block stylesheets %}{% endblock %}
         {% block javascripts %}{% endblock %}
     </head>
@@ -55,9 +57,11 @@
                 <a class="nav-link" href="{{ path('app_login')}}">Se connecter</a>
               </li>
               {% else %}
-              <li class="nav-item">
-                <a class="nav-link" href="{{ path('app_logout')}}">Se déconnecter</a>
-              </li>
+                  <a href="{{ path('home', {id: app.user.id}) }}" class="btn btn-dark mb-1">
+                  <i class="far fa-user"></i> Mon compte</a>
+                <a href="{{ path('app_logout') }}" class="btn btn-dark mb-1">
+                  <i class="fas fa-sign-out-alt"></i>
+                </a>
               {% endif %}
             </ul>
             {# <form class="d-flex">
@@ -68,8 +72,9 @@
         </div>
     </nav>
 
-    
+    <div class="container">
     {% block body %}{% endblock %}
+    </div>
     
 
     {# cdn js bootstrap #}

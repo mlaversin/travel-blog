@@ -4,6 +4,7 @@
     box-sizing: border-box;
 }
 
+
 .navbar {
     overflow: hidden;
     position: fixed; /* Set the navbar to fixed position */
@@ -24,8 +25,7 @@ section {
     overflow-y: scroll;
     height: 100vh;
 
-    /* Remove scrollbar for IE and Firefox */
-    -ms-overlow-style: none;
+    -ms-overlow-style: none; /* Remove scrollbar for IE and Firefox */
     scrollbar-width: none;
 }
 
