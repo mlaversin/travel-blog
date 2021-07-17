@@ -4,7 +4,6 @@
     box-sizing: border-box;
 }
 
-
 .navbar {
     overflow: hidden;
     position: fixed; /* Set the navbar to fixed position */
