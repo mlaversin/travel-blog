@@ -3,7 +3,7 @@
 {% block title %} Titre de l'article {% endblock %}
 
 {% block body %}
-
+<div class="container">
     <article>
         <h2> {{ article.title }} </h2>
         <div class="metadata">Ecrit le {{ article.createdAt | date('d/m/Y') }} à {{ article.createdAt | date('H:i') }} dans la catégorie {{ article.category.title }}</div>
@@ -27,5 +27,5 @@
             </div>
          {% endfor %}
     </section>
-
+</div>
 {% endblock %}
