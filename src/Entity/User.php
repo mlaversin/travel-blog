@@ -133,8 +133,8 @@ class User implements UserInterface, \Serializable
         ) = unserialize($serialized, array('allowed_classes' => false));
     }
 
-    // public function getUserIdentifier()
-    // {
+    public function getUserIdentifier()
+    {
     //     // method returns "null" in non-legacy mode if not overridden
     //     $username = $this->getUsername(false);
     //     if (null !== $username) {
@@ -147,6 +147,6 @@ class User implements UserInterface, \Serializable
     //     }
     
     //     return (string) $this->user;
-    // }
+    }
 
 }
