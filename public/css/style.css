@@ -23,6 +23,7 @@ section {
     scroll-snap-type: y mandatory;
     overflow-y: scroll;
     height: 100vh;
+    width: 100vw;
 
     -ms-overlow-style: none; /* Remove scrollbar for IE and Firefox */
     scrollbar-width: none;
