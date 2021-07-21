@@ -135,18 +135,18 @@ class User implements UserInterface, \Serializable
 
     public function getUserIdentifier()
     {
-    //     // method returns "null" in non-legacy mode if not overridden
-    //     $username = $this->getUsername(false);
-    //     if (null !== $username) {
-    //         trigger_deprecation('symfony/security-core', '5.3', 'Method "%s::getUsername()" is deprecated, override "getUserIdentifier()" instead.', get_debug_type($this));
-    //     }
+    // method returns "null" in non-legacy mode if not overridden
+        $username = $this->getUsername(false);
+        if (null !== $username) {
+        trigger_deprecation('symfony/security-core', '5.3', 'Method "%s::getUsername()" is deprecated, override "getUserIdentifier()" instead.', get_debug_type($this));
+    }
     
-    //     if ($this->user instanceof UserInterface) {
-    //         // @deprecated since 5.3, change to $user->getUserIdentifier() in 6.0
-    //         return method_exists($this->user, 'getUserIdentifier') ? $this->user->getUserIdentifier() : $this->user->getUsername();
-    //     }
+    if ($this->user instanceof UserInterface) {
+        // @deprecated since 5.3, change to $user->getUserIdentifier() in 6.0
+        return method_exists($this->user, 'getUserIdentifier') ? $this->user->getUserIdentifier() : $this->user->getUsername();
+    }
     
-    //     return (string) $this->user;
+    return (string) $this->user;
     }
 
 }

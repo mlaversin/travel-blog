@@ -4,11 +4,36 @@
 
 {% block body %}
 
+<div class="container my-5">
+  <div class="row">
+    <div class="col-10 mx-auto">
 
-    <h1>Hello {{ user.username }} !</h1>
 
-    <h2> Votre profil</h2>
+        <h1>Hello {{ user.username }} !</h1>
 
-    <h2> Vos messages</h2>
+        <div class="my-4">
+            <h2 class="h4 mb-4"><i class="far fa-address-card"></i> Vos informations</h2>
+            <table class="table table-striped mb-5">
+                <tbody>
+                    <tr>
+                        <th>Pseudo</th>
+                        <td>{{ user.username }}</td>
+                    </tr>
+                    <tr>
+                        <th>Age</th>
+                        <td> age</td>
+                    </tr>          
+                </tbody>
+            </table>
+        </div>
+
+        <div class="my-4">
+        <h2 class="h4 mb-4"><i class="fas fa-feather-alt"></i> Vos messages</h2>
+        </div>
+
+	</div>
+  </div>
+</div>
+
     
 {% endblock %}
