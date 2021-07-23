@@ -35,7 +35,7 @@ class Article
     private $image;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime_immutable")
      */
     private $createdAt;
 
